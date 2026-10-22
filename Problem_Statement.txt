@@ -1,0 +1,163 @@
+SMART CAMPUS AI
+Academic Risk Prediction & Personalized Study Planner
+=====================================================
+
+PROJECT OVERVIEW
+----------------
+Smart Campus AI is a Python and Machine Learning educational prototype that
+analyzes selected student-related factors to estimate whether a student may
+need additional academic support. It also provides practical, rule-based study
+recommendations based on the information entered.
+
+The project is designed for demonstration and learning. It is not a definitive
+assessment of a student's ability or future performance.
+
+PROBLEM STATEMENT
+-----------------
+Students may experience academic difficulties that are identified only after
+examinations. Smart Campus AI explores whether selected factors—such as study
+time, absences, previous class failures, and access to educational support—can
+help flag students who may benefit from earlier support.
+
+MAIN FEATURES
+-------------
+
+1. Machine Learning-Based Academic Risk Classification
+   - Uses a Random Forest classifier.
+   - Predicts one of two classes:
+       * Needs support: final grade in the source dataset is below 10/20.
+       * Not currently flagged: final grade in the source dataset is 10/20 or
+         above.
+   - The model is trained using selected student-related features.
+   - Earlier-period grades (G1 and G2) are excluded from the selected inputs.
+
+2. Student Information Input
+   The interactive application accepts:
+   - Age
+   - Weekly study-time category
+   - Number of previous class failures
+   - Number of absences
+   - Extra school support (yes/no)
+   - Family educational support (yes/no)
+   - Extra paid classes (yes/no)
+   - Participation in extracurricular activities (yes/no)
+   - Internet access at home (yes/no)
+   - Self-reported health rating
+   - Frequency of going out
+   - Free time after school
+
+3. Estimated Risk Probability
+   - Displays the model-estimated probability of belonging to the low-final-grade
+     class.
+   - Shows whether the model flags the entered profile for possible additional
+     support.
+   - The estimate is not a guarantee of a student's actual result.
+
+4. Personalized Study Recommendations
+   The application generates practical suggestions based on entered information.
+   Examples include:
+   - Build a consistent study timetable when reported study time is low.
+   - Review missed lessons and discuss attendance barriers when absences are high.
+   - Seek help with difficult topics when previous class failures are reported.
+   - Explore available school support when extra school support is not used.
+   - Consider a study partner or mentor when family educational support is absent.
+   - Ask about offline learning resources when home internet access is unavailable.
+   - Seek appropriate support if health difficulties affect study.
+   - Continue regular revision and weekly progress reviews when no specific rule
+     is triggered.
+
+5. Data Exploration and Visualization (Notebook)
+   The Jupyter Notebook can be used to:
+   - Inspect dataset columns, shape, summary statistics, and missing values.
+   - Visualize final-grade distribution.
+   - Visualize study-time categories and absences.
+   - Explore feature importance after training.
+
+6. Model Evaluation
+   The notebook evaluates the trained model using:
+   - Accuracy
+   - Precision
+   - Recall
+   - F1-score
+   - ROC-AUC
+   - Confusion matrix
+   These metrics describe performance on a held-out test set. Actual scores must
+   be measured by running the notebook; no performance level is guaranteed.
+
+7. Explainable Feature Analysis
+   - Displays Random Forest feature importance to show which input variables
+     the model relied on most overall.
+   - Feature importance indicates model behavior, not causation.
+
+8. Saved Model
+   - Exports the trained preprocessing-and-model pipeline to
+     student_risk_model.pkl using joblib.
+   - The Streamlit app loads the saved model instead of training it each time.
+   - Retrain and save the model again if the training code or model changes.
+
+9. Interactive Web Application
+   - Built with Streamlit.
+   - Provides a simple form for entering student information.
+   - Displays the predicted class, estimated probability, and recommendations.
+   - Can run locally or be deployed online so users can access it through a
+     browser. Online availability depends on the hosting service and deployment.
+
+TECHNOLOGY STACK
+----------------
+- Language: Python
+- Data handling: Pandas and NumPy
+- Machine Learning: scikit-learn Random Forest classifier and preprocessing
+  pipeline
+- Visualization: Matplotlib and Seaborn
+- Dataset access: ucimlrepo (for downloading the UCI dataset during training)
+- Model persistence: joblib
+- Web interface: Streamlit
+- Development environment: Jupyter Notebook and/or Python scripts
+
+DATASET AND TARGET
+------------------
+The project uses the UCI Student Performance dataset (dataset ID 320), which
+contains records from Portuguese schools. The target is the final grade (G3),
+converted into a binary classification target:
+- 1 = G3 below 10
+- 0 = G3 equal to or above 10
+
+The selected model inputs are:
+age, studytime, failures, absences, schoolsup, famsup, paid, activities,
+internet, health, goout, freetime.
+
+LIMITATIONS AND RESPONSIBLE USE
+-------------------------------
+- The dataset represents secondary-school students in Portugal. It may not
+  generalize to Indian college students or other populations.
+- Predictions are estimates and may be wrong.
+- The application should support, not replace, conversations with students,
+  teachers, or qualified support staff.
+- Do not use a prediction alone to label, punish, exclude, or make high-stakes
+  decisions about a student.
+- Protect personal information and avoid uploading identifiable student records
+  to public repositories.
+- The dataset's historical relationships do not prove that any feature causes
+  a particular academic outcome.
+- The model should be validated on suitable local data before real-world use.
+
+PROJECT FILES
+-------------
+A typical project folder may contain:
+- smart_campus.ipynb       : notebook for data exploration, training, and evaluation
+- student_risk_model.pkl   : saved trained ML pipeline
+- app.py                   : Streamlit application
+- requirements.txt         : Python package dependencies
+- README.txt               : this project overview and feature list
+
+HOW TO RUN LOCALLY
+------------------
+1. Install dependencies in the Python environment used for the project.
+2. Run the notebook cells to train and evaluate the model.
+3. Run the joblib save command to create student_risk_model.pkl.
+4. Ensure app.py and student_risk_model.pkl are in the same folder.
+5. Open Command Prompt or a terminal in that folder and run:
+       python -m streamlit run app.py
+6. Open the local URL displayed by Streamlit in your browser.
+
+END OF DOCUMENT
