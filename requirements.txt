@@ -1,0 +1,7 @@
+NumPy == 2.4.6
+Pandas == 3.0.3
+Scikit-Learn ==1.9.0
+Streamlit == 1.58.0
+Seaborn == 0.13.2
+Matplotlib == 3.11.0
+Joblib == 1.5.3
